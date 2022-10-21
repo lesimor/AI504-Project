@@ -18,6 +18,19 @@
             }
         },
         {
+            "name": "GAN: Generate - DC GAN",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/scripts/image_generator.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "envFile": "${workspaceFolder}/.env",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src${pathSeparator}${env:PYTHONPATH}"
+            }
+        },
+        {
             "name": "GAN: Train",
             "type": "python",
             "request": "launch",
@@ -27,6 +40,19 @@
             "justMyCode": true,
             "env": {
                 "PYTHONPATH": "${workspaceFolder}/src${pathSeparator}${env:PYTHONPATH}"
+            }
+        },
+        {
+            "name": "GAN: Train - debug",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/src/train.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src${pathSeparator}${env:PYTHONPATH}",
+                "DEBUG": "TRUE"
             }
         }
     ]

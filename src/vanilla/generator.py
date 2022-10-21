@@ -42,20 +42,21 @@ class Generator(nn.Module):
         return output
 
 
-# 제너레이터 생성
-generator = Generator().cuda()
-ckpt_path = Path.cwd() / "assets" / "checkpoint"
-netG_ckpt_name = os.getenv("CHECKPOINT_NAME")
-if not netG_ckpt_name:
-    raise Exception("You should provide CHECKPOINT_NAME variable")
-generator.load_state_dict(torch.load(ckpt_path / netG_ckpt_name))
+if __name__ == "__main__":
+    # 제너레이터 생성
+    generator = Generator().cuda()
+    ckpt_path = Path.cwd() / "assets" / "checkpoint"
+    netG_ckpt_name = os.getenv("CHECKPOINT_NAME")
+    if not netG_ckpt_name:
+        raise Exception("You should provide CHECKPOINT_NAME variable")
+    generator.load_state_dict(torch.load(ckpt_path / netG_ckpt_name))
 
-# 이미지 저장 경로 설정
-saving_path = Path.cwd() / "assets" / "artifact" / "generated"
-saving_path.mkdir(parents=True, exist_ok=True)
+    # 이미지 저장 경로 설정
+    saving_path = Path.cwd() / "assets" / "artifact" / "generated"
+    saving_path.mkdir(parents=True, exist_ok=True)
 
-image_num = int(os.getenv("NUM_IMG", 100))
-for x in range(image_num):
-    noise = torch.randn(NOISE_WIDTH, 100).cuda()
-    generated_image = generator(noise)[0]
-    utils.save_image(generated_image.cuda().detach(), saving_path / f"{x}.png")
+    image_num = int(os.getenv("NUM_IMG", 100))
+    for x in range(image_num):
+        noise = torch.randn(NOISE_WIDTH, 100).cuda()
+        generated_image = generator(noise)[0]
+        utils.save_image(generated_image.cuda().detach(), saving_path / f"{x}.png")

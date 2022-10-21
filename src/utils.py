@@ -15,7 +15,7 @@ def vis_image(image):
     plt.show()
 
 
-def save_gif(training_progress_images, images):
+def save_gif(training_progress_images, images, model_name):
     """
     training_progress_images: list of training images generated each iteration
     images: image that is generated in this iteration
@@ -26,7 +26,7 @@ def save_gif(training_progress_images, images):
     img_grid = img_grid.astype(np.uint8)
     training_progress_images.append(img_grid)
     imageio.mimsave(
-        Path.cwd() / "assets" / "gif" / "training_progress.gif",
+        Path.cwd() / "assets" / "gif" / f"{model_name}_training_progress.gif",
         training_progress_images,
     )
     return training_progress_images
